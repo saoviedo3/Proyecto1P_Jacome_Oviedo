@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Entities.Categories>
+
+@{
+    ViewBag.Title = "Categorías";
+}
+
+<h2>Categorías</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td>@category.CategoryName</td>
+                <td>@category.Description</td>
+                <td>
+                    <!-- Botón Editar -->
+                    @Html.ActionLink("Editar", "Edit", "Categories", new { id = category.CategoryID }, new { @class = "btn btn-primary btn-sm" })
+
+                    <!-- Botón Eliminar -->
+                    @using (Html.BeginForm("Delete", "Categories", FormMethod.Post, new { @class = "d-inline" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@category.CategoryID" />
+                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    @Html.ActionLink("Crear nueva categoría", "Create", "Categories", null, new { @class = "btn btn-primary" })
+</p>

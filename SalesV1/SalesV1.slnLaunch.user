@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Nuevo perfil",
+    "Projects": [
+      {
+        "Path": "WebApp.SecurityGUI\\WebApp.SecurityGUI.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "Service\\Service.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

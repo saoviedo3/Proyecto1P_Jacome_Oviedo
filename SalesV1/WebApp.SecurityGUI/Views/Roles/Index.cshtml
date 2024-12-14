@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
+
+@{
+    ViewBag.Title = "Gestión de Roles";
+}
+
+<h2>Gestión de Roles</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+
+<p>
+    <!-- Botón para crear un nuevo rol -->
+    @Html.ActionLink("Crear nuevo rol", "Create", "Roles", null, new { @class = "btn btn-primary" })
+
+    <!-- Botón para asignar roles -->
+    @Html.ActionLink("Asignar Roles", "AssignRole", "Roles", null, new { @class = "btn btn-secondary ml-2" })
+</p>
+
+<h3>Roles disponibles</h3>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Nombre del Rol</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var role in Model)
+        {
+            <tr>
+                <td>@role.Name</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>Usuarios registrados</h3>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Nombre de Usuario</th>
+            <th>Email</th>
+            <th>Roles</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in ViewBag.Users as IEnumerable<WebApp.SecurityGUI.Models.ApplicationUser>)
+        {
+            <tr>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+                <td>
+                    <!-- Mostrar los roles asignados al usuario -->
+                    @string.Join(", ", user.Roles.Select(r => r.RoleId).ToList())
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

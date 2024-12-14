@@ -1,0 +1,20 @@
+﻿@model WebApp.SecurityGUI.Models.AssignRoleViewModel
+
+<h2>Asignar Rol</h2>
+
+@using (Html.BeginForm("AssignRole", "Roles", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label for="UserId">Seleccionar Usuario:</label>
+        @Html.DropDownListFor(model => model.UserId, Model.Users, "Seleccione un usuario", new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <label for="RoleName">Seleccionar Rol:</label>
+        @Html.DropDownListFor(model => model.RoleName, Model.Roles, "Seleccione un rol", new { @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Asignar Rol</button>
+}

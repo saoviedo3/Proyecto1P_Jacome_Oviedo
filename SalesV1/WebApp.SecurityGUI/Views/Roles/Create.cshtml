@@ -1,0 +1,17 @@
+﻿@model WebApp.SecurityGUI.Models.RoleViewModel
+
+<h2>Crear Rol</h2>
+
+@using (Html.BeginForm("Create", "Roles", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.RoleName, "Nombre del Rol")
+        @Html.TextBoxFor(model => model.RoleName, new { @class = "form-control", placeholder = "Ingrese el nombre del rol" })
+        @Html.ValidationMessageFor(model => model.RoleName, "", new { @class = "text-danger" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Crear</button>
+    @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-secondary" })
+}
